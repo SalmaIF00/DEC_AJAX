@@ -1,0 +1,47 @@
+#navbar{
+    top: 0;
+  }
+
+  .main_wrapper {
+    margin-right: auto;
+    margin-left: auto;
+
+    max-width: 2048;
+    max-height: 1024;
+  }
+
+  aside {
+    width: 35%;
+    height: 95%;
+    padding: 30px;
+    float: left;
+  }
+
+  .principal {
+    width: 65%;
+    min-height: 980px;
+    max-height: 95%;
+    padding: 40px;
+    float: left;
+    background-color: rgba(60, 130, 211, 0.726);
+  }
+
+  .form_calculadora {
+    background-color: cornflowerblue;
+    padding-top: 100px;
+
+  }
+
+  .flotante {
+    background-color: white;
+    padding: 40px;
+    border-radius: 1%;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
+    width: 1000px;
+    height: 800px;
+  }
+  table{background-color: white;}
+  thead, tr{ height: 50px;}
+  label{margin-top: 10px;}

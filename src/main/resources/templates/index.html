@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<title>Pagina Index</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+  <link href="css/fontawesome/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" disabled="" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css">
+  <title>Examen</title>
+  <author></author>
+  <meta name="author" content="Alumno Alumno">
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/javascript_profesor.js"></script>
+    <script src="js/ajax.js"></script>
+  <!--<script src="javascript_alumno.js"></script>-->
+
+</head>
+
+<body >
+<!-- Inicio Navbar-->
+  <div id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid" >
+      	<div th:each="message:${sessionMessages}">
+      	 <a class="navbar-brand" th:text="${message}">msg</a>
+      	 <a th:if="${session.messages != null }"><button class="dropdown-item active" type="submit" th:href="@{/Csesion}">Cerrar Sesión</button></a>
+      	 <!-- <a th:if="${session.messages != null }"><a th:href="@{/Csesion}"><button type="button" class="btn btn-info"> Cerrar Sesión</button></a></a>-->
+      	</div>
+        <a class="navbar-brand" href="/">Examen de Desarrollo entorno servidor.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+            
+        </button>
+      <div>
+       
+    		 </div>
+          <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link toggle" id="menu" href="#menu_izq">Menu</a>
+            </li> 
+               
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </li>
+          </ul>
+          <form class="d-flex" th:action="@{/buscar}" method="get">
+            <input class="form-control me-sm-2" type="text" name="nombre_oferta" placeholder="Busca tu producto">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+          </form> 
+        </div>
+      </div>
+    </nav>
+
+  </div>
+<!-- Cierre Navbar-->
+<!-- Apertura contenedor principal-->
+	<div id="selector" class="main_wrapper">
+		<!-- Apertura menu izquierdo-->
+		<aside id="menu_izq" class="toggle toggle-content">
+		
+			<h2>Añadir Oferta</h2>
+
+<form class="form">
+			<div class="form-group">
+				<label class="col-form-label" for="inputNombre">Producto</label> <input
+					type="text" class="form-control" placeholder="Nombre del producto"
+					id="inputNombre" name="nombre_oferta">
+			</div>
+			
+			<div class="form-group">
+				<label class="form-label" for="inputEnlace">Fecha</label> <input
+					type="date" class="form-control" id="inputFecha" name="fecha_publicacion">
+			</div>
+			
+			<div class="form-group">
+				<label for="selectProducto">Selecciona Priodad</label> <select
+					class="form-select" id="selectProducto" size="3" name="prioridad">
+					<option>Baja</option>
+					<option>Media</option>
+					<option>Alta</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="inputGramos">Precio</label> <input
+					type="text" class="form-control" placeholder="Cuanto cuesta"
+					id="inputPrecio" name="precio">
+			</div>
+
+			<div class="form-group">
+				<label class="form-label" for="inputEnlace">Hipevínculo</label> <input
+					type="text" value="https://" class="form-control" id="inputEnlace" name="hiperenlace">
+			</div>
+			<div class="d-grid gap-2">
+
+				<div class="form-group">
+					<label for="inputDescripcion">Descripción</label>
+					<textarea class="form-control" id="inputDescripcion" rows="3" name="descripcion"></textarea>
+				</div>
+
+				<div class="d-grid gap-2">
+
+					<button type="submit" class="btn btn-lg btn-primary" id="crear">Añadir</button>
+				
+				</div>
+			</div>
+		
+		</aside>
+		<!-- Cierre menu izquierdo-->
+		<!-- Apertura contenedor de la tabla-->
+		<section class="principal">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Precio</th>
+						<th scope="col">Info</th>
+						<th scope="col">Borrar</th>
+					</tr>
+				</thead>
+				<tbody id="ofertas">
+						
+				</tbody>
+			</table>
+</form>
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<button class="accordion-button" type="button"
+							data-bs-toggle="collapse" data-bs-target="#collapseOne"
+							aria-expanded="true" aria-controls="collapseOne">
+							Introduce tu nombre</button>
+					</h2>
+					<div id="collapseOne" class="accordion-collapse collapse show"
+						aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+						<div class="accordion-body">
+							<form m th:action="@{/persistMessage}" method="post">
+								<div class="form-group">
+									<label class="col-form-label" for="inputDefault">Usuario </label> <input type="text" class="form-control"
+										placeholder="Escribe tu nombre" id="inputUsuario" name="msg">
+								</div>
+								<br>
+								<button type="submit" class="btn btn-primary">Guradar</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	</section>
+<!-- Cierre contenedor de la tabla-->
+
+<!-- Apertura menu izquierdo-->
+    <div id="selector" class="main_wrapper">
+
+      <aside id="menu_dch" class="">
+  
+        <h2> Filtrar Ofertas</h2>
+ <form th:action="@{/filtrar}" th:method="get">
+        <fieldset class="form-group">
+          <legend>Prioridad</legend>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="prioridad" id="prioridadBaja" value="Baja">
+              Priodad baja
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="prioridad" id="prioridadMedia" value="Media">
+              Prioridad Media
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="prioridad" id="prioridadAlta" value="Alta">
+              Prioridad Alta
+            </label>
+          </div>
+        </fieldset>
+        <button type="submit" id="filtrarPorPrioridad" class="btn btn-lg btn-primary">Filtrar por Prioridad</button>
+      </form>
+      </aside>
+  </div>
+<!-- Cierre menu izquierdo-->
+
+<!-- Apertura Ventana modal-->
+  <div id="modal" class="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" id="cerrar-modal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Cierre Ventana modal-->
+
+</body>
+
+</html>
