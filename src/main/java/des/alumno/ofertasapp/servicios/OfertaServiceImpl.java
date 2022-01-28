@@ -25,13 +25,47 @@ public class OfertaServiceImpl implements OfertaServicio{
 	}
 	@Override
 	public List<Oferta> findByName(String nombre_oferta) {
-		
-		return ofertaDao.findByName(nombre_oferta);
+		List <Oferta> listaNombre = ofertaDao.findByName(nombre_oferta);
+		return listaNombre;
 	}
 	@Override
 	public Oferta crearOferta(Oferta oferta) {
 		
 		return ofertaDao.crear(oferta);
 	}
+	
+//	@Override
+//	public void borrarOferta(Oferta id) {
+//		ofertaDao.borrar(id);
+//		
+//	}
+	@Override
+	public Oferta buscarOferta(Oferta id) {
+		
+		return ofertaDao.buscar(id);
+	}
+	@Override
+	public Oferta actualizarOferta(Oferta oferta) {
+		
+		return ofertaDao.actualizar(oferta);
+	}
+	@Override
+	public List<Oferta> findByid(Integer id_oferta) {
+		List <Oferta> listaid = ofertaDao.findById(id_oferta);
+		return listaid;
+		
+	}
+	@Override
+	public Oferta buscaOfertar(Oferta id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void borrarOferta(Integer id_oferta) {
+		ofertaDao.borrar(id_oferta);
+		
+	}
+
+
 	
 }

@@ -28,8 +28,6 @@ public class IndexController {
 	@GetMapping("/")
 	public String getIndex () {
 		List<Oferta> ofertas = OfertaDao.findAll();
-		//model.addAttribute("ofertas", ofertas);
-
 		return "index";
 	}
 	
@@ -48,9 +46,12 @@ public class IndexController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.DELETE, value = "eliminar/{id_oferta}")
+	@RequestMapping(method = RequestMethod.POST, value = "eliminar/{id_oferta}")
 	public void eliminarOferta(@PathVariable(value="id_oferta") Integer id_oferta) {
-//		 ofertaServicio.borrar(id_oferta);
+		List<Oferta> id_ofertas= ofertaServicio.findByid(id_oferta);
+		ofertaServicio.borrarOferta(id_oferta);
+	//	List<Oferta> ListaOferta = ofertaServicio.obtenerOfertas();
+		 
 	}
 	
 	@ResponseBody
