@@ -23,6 +23,8 @@ public interface OfertaServicio  {
 	Oferta actualizarOferta(Oferta oferta);
 
 	Oferta buscarOferta(Oferta oferta);
+	
+	List<Oferta> BuscarPrioridad(String prioridad);
 
 
 

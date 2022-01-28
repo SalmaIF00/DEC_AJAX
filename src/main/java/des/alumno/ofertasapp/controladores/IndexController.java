@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,25 +52,21 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, value = "eliminar/{id_oferta}")
-	public void eliminarOferta(@PathVariable(value="id_oferta") Integer id_oferta) {
-		List<Oferta> id_ofertas= ofertaServicio.findByid(id_oferta);
+	public ResponseEntity<Object> eliminarOferta(@PathVariable(value="id_oferta") Integer id_oferta) {
 		ofertaServicio.borrarOferta(id_oferta);
-	//	List<Oferta> ListaOferta = ofertaServicio.obtenerOfertas();
-		 
+		return new ResponseEntity<Object>("Elemento Borrado",HttpStatus.OK);		 
 	}
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, value = "crear")
 	public Oferta guardarOferta(@RequestBody Map<String, String> json) {
-
-
 		return ofertaServicio.crearOferta(new Oferta(null,json.get("nombre_oferta"),json.get("fecha_publicacion"),json.get("prioridad"),json.get("hiperenlace"),json.get("descripcion"),Double.valueOf(json.get("precio"))));
 	}
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "buscar")
-	public List<Oferta> 	buscarOferta(@PathVariable(value="id_oferta") Integer id_oferta) {
-		return ofertaServicio.findByName(null);
+	public List<Oferta> buscarOferta(@PathVariable(value="prioridad") String prioridad) {
+		return ofertaServicio.BuscarPrioridad(prioridad);
 	}
 		
 }

@@ -33,12 +33,7 @@ public class OfertaServiceImpl implements OfertaServicio{
 		
 		return ofertaDao.crear(oferta);
 	}
-	
-//	@Override
-//	public void borrarOferta(Oferta id) {
-//		ofertaDao.borrar(id);
-//		
-//	}
+
 	@Override
 	public Oferta buscarOferta(Oferta id) {
 		
@@ -64,6 +59,11 @@ public class OfertaServiceImpl implements OfertaServicio{
 	public void borrarOferta(Integer id_oferta) {
 		ofertaDao.borrar(id_oferta);
 		
+	}
+	@Override
+	public List<Oferta> BuscarPrioridad(String prioridad) {
+		List <Oferta> lPrioridad = ofertaDao.findByPrioridad(prioridad);
+		return lPrioridad;
 	}
 
 
