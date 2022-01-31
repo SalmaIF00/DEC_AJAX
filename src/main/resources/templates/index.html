@@ -54,7 +54,7 @@
               </div>
             </li>
           </ul>
-          <form class="d-flex" th:action="@{/buscar}" method="get">
+          <form class="d-flex">
             <input class="form-control me-sm-2" type="text" name="nombre_oferta" placeholder="Busca tu producto">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
           </form> 
@@ -168,7 +168,7 @@
       <aside id="menu_dch" class="">
   
         <h2> Filtrar Ofertas</h2>
- <form th:action="@{/filtrar}" th:method="get">
+ <form th:action="@{/buscar}" th:method="get">
         <fieldset class="form-group">
           <legend>Prioridad</legend>
           <div class="form-check">

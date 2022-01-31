@@ -10,11 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import des.alumno.ofertasapp.entidades.Oferta;
@@ -62,11 +64,19 @@ public class IndexController {
 	public Oferta guardarOferta(@RequestBody Map<String, String> json) {
 		return ofertaServicio.crearOferta(new Oferta(null,json.get("nombre_oferta"),json.get("fecha_publicacion"),json.get("prioridad"),json.get("hiperenlace"),json.get("descripcion"),Double.valueOf(json.get("precio"))));
 	}
-	
+
+
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, value = "buscar")
-	public List<Oferta> buscarOferta(@PathVariable(value="prioridad") String prioridad) {
-		return ofertaServicio.BuscarPrioridad(prioridad);
+	@RequestMapping(method = RequestMethod.GET, value = "buscar/{prioridad}")
+	public String buscarOferta(Model modelo,@RequestParam String prioridad) {
+	List<Oferta>ofertas= ofertaServicio.BuscarPrioridad(prioridad);
+	modelo.addAttribute("ofertas", ofertas);
+	return "index";
 	}
-		
+
+//	@ResponseBody
+//	@RequestMapping(method = RequestMethod.GET, value = "info")
+//	public List<Oferta> mostrarInfo(@PathVariable(value="info") String info) {
+//		return ofertaServicio.
+//	}
 }

@@ -12,18 +12,10 @@ public interface OfertaServicio  {
 	
 	Oferta crearOferta(Oferta oferta);
 
-	List<Oferta> findByName(String nombre_oferta);
-	
-	List<Oferta> findByid(Integer id_oferta);
-
 	void borrarOferta(Integer id_oferta);
-
-	Oferta buscaOfertar(Oferta id);
 
 	Oferta actualizarOferta(Oferta oferta);
 
-	Oferta buscarOferta(Oferta oferta);
-	
 	List<Oferta> BuscarPrioridad(String prioridad);
 
 

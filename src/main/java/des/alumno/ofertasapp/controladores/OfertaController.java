@@ -70,13 +70,13 @@ public class OfertaController {
 
 	// CONTROLADOR FILTRAR
 
-	@GetMapping("/filtrar{prioridad}")
-	public String listaFiltrar(Model modelo, @RequestParam String prioridad) {
-
-		List<Oferta> ofertas = OfertaDao.findByPrioridad(prioridad);
-		modelo.addAttribute("ofertas", ofertas);
-		return "/index";
-	}
+//	@GetMapping("/filtrar{prioridad}")
+//	public String listaFiltrar(Model modelo, @RequestParam String prioridad) {
+//
+//		List<Oferta> ofertas = OfertaDao.findByPrioridad(prioridad);
+//		modelo.addAttribute("ofertas", ofertas);
+//		return "/index";
+//	}
 
 	// CONTROLADOR BORRAR
 //	@ResponseBody

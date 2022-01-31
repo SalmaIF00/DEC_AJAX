@@ -66,7 +66,7 @@ function crearFila(oferta) {
 
 function obtenerOfertas() {
 	var tbody = document.getElementById("ofertas");
-	var prioridad = document.getElementById("selectProducto");
+//	var prioridad = document.getElementById("selectProducto");
 
 	tbody.replaceChildren();
 	fetch('/mostrar', { headers: { "Content-Type": "application/json; charset=utf-8" } })
@@ -143,21 +143,26 @@ function deleteRow(borrar) {
 }
 
 
-function filtrarPrioridad() {
-	var prioridad = document.getElementById("selectProducto").value;
-	fetch('/buscar/' + prioridad, {
-		headers: {
-			'content-type': 'application/json'
-		},
-		method: 'GET',
-		body: JSON.stringify({
-			prioridad: prioridad
-		})
-	})
-		.then(response => {
-
-		})
-}
+//function filtrarPrioridad(prioridad) {
+//	var oferta = prioridad.parentNode.parentNode;
+//	var prioridad = document.getElementById("selectProducto").value;
+//	fetch('/buscar/' + prioridad, {
+//		headers: {
+//			'content-type': 'application/json'
+//		},
+//		method: 'GET',
+//		body: JSON.stringify({
+//			prioridad: prioridad
+//		})
+//	})
+//		.then(response => {
+//			console.log(response);
+//			var tr = obtenerOfertas(response);
+//						var tbody = document.getElementById("ofertas");
+//			tbody.appendChild(tr);
+//			
+//		})
+//}
 
 
 
@@ -166,7 +171,7 @@ function filtrarPrioridad() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-	$("#refrescar").click(obtenerOfertas);
+//	$("#refrescar").click(obtenerOfertas);
 	$("#crear").click(crearOfertas);
 	$("#borrar").click(deleteRow);
 
