@@ -18,6 +18,8 @@ public interface OfertaServicio  {
 
 	List<Oferta> BuscarPrioridad(String prioridad);
 
+	Oferta obtenerOfertas(String prioridad);
+
 
 
 }

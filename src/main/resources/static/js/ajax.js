@@ -107,7 +107,8 @@ function crearOfertas(e) {
 		})
 	})
 		.then(res => res.json())
-		.then(data => {
+		.then(data =>{
+				
 
 			var tr = crearFila(data);
 			var tbody = document.getElementById("ofertas");
@@ -142,7 +143,7 @@ function deleteRow(borrar) {
 		})
 }
 
-
+//
 //function filtrarPrioridad(prioridad) {
 //	var oferta = prioridad.parentNode.parentNode;
 //	var prioridad = document.getElementById("selectProducto").value;
@@ -158,15 +159,53 @@ function deleteRow(borrar) {
 //		.then(response => {
 //			console.log(response);
 //			var tr = obtenerOfertas(response);
-//						var tbody = document.getElementById("ofertas");
+//			var tbody = document.getElementById("ofertas");
 //			tbody.appendChild(tr);
 //			
 //		})
 //}
 
+function filtrarPrioridad(e) {
+	e.preventDefault();
+	var tbody = document.getElementById("ofertas");
+	
+	var prioridad = document.getElementsByName('prioridad');
+	var check;
+		for (i = 0; i<prioridad.length;i++){
+			 if(prioridad[i].checked){
+                check=  prioridad[i].value;
+                  }
+            }
+//	var prioridad = document.getElementById("selectProducto");
+	ActualizarTabla()
+		fetch('/buscar/' + check, {
+		headers: {
+			'content-type': 'application/json'
+		},
+		method: 'GET',
+		body: JSON.stringify({
+			prioridad: prioridad
+		})
+	})
+		.then(res => res.json())
+		.then(response => {
 
+			
+			for (let oferta of response) {
+			 crearFila(oferta);
 
+			}
+		})
+}
 
+function ActualizarTabla(){
+    var tabla= document.getElementById("oferta");
+    var tablaActualizada=document.createElement("tbody");
+    var id=document.createAttribute("id");
+    id.value="oferta";
+    nuevatabla.setAttributeNode(id);
+    tabla.parentNode.replaceChild(nuevatabla,tabla);
+}
 
 
 
@@ -174,6 +213,8 @@ document.addEventListener("DOMContentLoaded", function() {
 //	$("#refrescar").click(obtenerOfertas);
 	$("#crear").click(crearOfertas);
 	$("#borrar").click(deleteRow);
+	$("#filtrarPorPrioridad").click(filtrarPrioridad);
+	
 
 
 });

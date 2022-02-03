@@ -49,5 +49,12 @@ public class OfertaServiceImpl implements OfertaServicio{
 		return lPrioridad;
 	}
 
+	@Override
+	public Oferta obtenerOfertas(String prioridad) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
 	
 }
