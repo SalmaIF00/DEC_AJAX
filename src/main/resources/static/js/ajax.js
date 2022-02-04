@@ -18,7 +18,7 @@ function crearFila(oferta) {
 
 
 	//Creo las columnas
-	var td1_id = document.createElement("td");
+	var td1_id = document.createElement("th");
 	var td2_nombre = document.createElement("td");
 	var td3_precio = document.createElement("td");
 	var td4_info = document.createElement("td");
@@ -58,7 +58,7 @@ function crearFila(oferta) {
 	tr.appendChild(td3_precio);
 	tr.appendChild(td4_info);
 	tr.appendChild(td5_borrar);
-	return tr
+	return tr;
 
 }
 
@@ -66,7 +66,7 @@ function crearFila(oferta) {
 
 function obtenerOfertas() {
 	var tbody = document.getElementById("ofertas");
-//	var prioridad = document.getElementById("selectProducto");
+	//	var prioridad = document.getElementById("selectProducto");
 
 	tbody.replaceChildren();
 	fetch('/mostrar', { headers: { "Content-Type": "application/json; charset=utf-8" } })
@@ -107,8 +107,8 @@ function crearOfertas(e) {
 		})
 	})
 		.then(res => res.json())
-		.then(data =>{
-				
+		.then(data => {
+
 
 			var tr = crearFila(data);
 			var tbody = document.getElementById("ofertas");
@@ -124,7 +124,7 @@ function crearOfertas(e) {
 function deleteRow(borrar) {
 
 	var oferta = borrar.parentNode.parentNode;
-	var id_producto = oferta.querySelector("td").innerText;
+	var id_producto = oferta.querySelector("th").innerText;
 	fetch('/eliminar/' + id_producto, {
 		headers: {
 			'content-type': 'application/json'
@@ -143,79 +143,75 @@ function deleteRow(borrar) {
 		})
 }
 
-//
-//function filtrarPrioridad(prioridad) {
-//	var oferta = prioridad.parentNode.parentNode;
-//	var prioridad = document.getElementById("selectProducto").value;
-//	fetch('/buscar/' + prioridad, {
-//		headers: {
-//			'content-type': 'application/json'
-//		},
-//		method: 'GET',
-//		body: JSON.stringify({
-//			prioridad: prioridad
-//		})
-//	})
-//		.then(response => {
-//			console.log(response);
-//			var tr = obtenerOfertas(response);
-//			var tbody = document.getElementById("ofertas");
-//			tbody.appendChild(tr);
-//			
-//		})
-//}
-
 function filtrarPrioridad(e) {
 	e.preventDefault();
 	var tbody = document.getElementById("ofertas");
-	
+
 	var prioridad = document.getElementsByName('prioridad');
 	var check;
-		for (i = 0; i<prioridad.length;i++){
-			 if(prioridad[i].checked){
-                check=  prioridad[i].value;
-                  }
-            }
-//	var prioridad = document.getElementById("selectProducto");
-	ActualizarTabla()
-		fetch('/buscar/' + check, {
+	for (i = 0; i < prioridad.length; i++) {
+		if (prioridad[i].checked) {
+			check = prioridad[i].value;
+		}
+	}
+	var prioridad = document.getElementById("selectProducto");
+
+	fetch('/buscar/' + check, {
 		headers: {
 			'content-type': 'application/json'
 		},
-		method: 'GET',
-		body: JSON.stringify({
-			prioridad: prioridad
-		})
+		method: 'GET'
 	})
 		.then(res => res.json())
 		.then(response => {
+			limpiarTabla();
 
-			
 			for (let oferta of response) {
-			 crearFila(oferta);
+				
+			var tr = crearFila(oferta);
+			var tbody = document.getElementById("ofertas");
+			tbody.appendChild(tr);
 
 			}
 		})
 }
 
-function ActualizarTabla(){
-    var tabla= document.getElementById("oferta");
-    var tablaActualizada=document.createElement("tbody");
-    var id=document.createAttribute("id");
-    id.value="oferta";
-    nuevatabla.setAttributeNode(id);
-    tabla.parentNode.replaceChild(nuevatabla,tabla);
+
+
+function limpiarTabla() {
+    let resultados = document.getElementById("ofertas");
+    resultados.replaceChildren();
 }
 
-
+//function MostrarModal(self) {
+//	$("#modal").modal("show");
+//		var oferta = self.parentNode.parentNode;
+//	var id_oferta = oferta.querySelector("th").innerText;
+//	fetch('/mostrarModal/'+id_oferta ,  {
+//		headers: {
+//			'content-type': 'application/json'
+//		},
+//		method: 'GET',
+//		.then(res => res.json())
+//		.then(data => {
+//		let modal = document.getElementByName("modal-body");
+//		modal.remplaceChildren();
+// 		let p1 = document.createElement('p');
+// 		p1.innerText=data.id_oferta;
+// 		modal.appendChild(p1);
+//		})
+//	
+//		
+//	})
+//}
 
 document.addEventListener("DOMContentLoaded", function() {
-//	$("#refrescar").click(obtenerOfertas);
+
 	$("#crear").click(crearOfertas);
 	$("#borrar").click(deleteRow);
 	$("#filtrarPorPrioridad").click(filtrarPrioridad);
-	
-
-
+	$("#modal").click(MostrarModal);
 });
+
+
 

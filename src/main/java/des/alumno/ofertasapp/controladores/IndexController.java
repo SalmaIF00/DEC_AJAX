@@ -63,23 +63,12 @@ public class IndexController {
 	}
 
 	@ResponseBody
-	@GetMapping(value = "/buscar")
-	public ArrayList<Oferta> buscarPorPatronPrioridad( @RequestParam String prioridad) {
+	@GetMapping(value = "/buscar/{prioridad}")
+	public ArrayList<Oferta> buscarPorPatronPrioridad( @PathVariable(value = "prioridad") String prioridad) {
 
 			return (ArrayList<Oferta>) ofertaServicio.BuscarPrioridad(prioridad);
 		
 			
 	}
-//	@RequestMapping(method = RequestMethod.GET, value = "buscar/{prioridad}")
-//	public List<Oferta> buscarOferta(@RequestParam String prioridad) {
-//		return ofertaServicio.BuscarPrioridad(prioridad);
-//	}
-//	List<Oferta> ofertas = ofertaServicio.BuscarPrioridad(prioridad);
-////modelo.addAttribute("ofertas", ofertas);
-//	return "index";
-//	@ResponseBody
-//	@RequestMapping(method = RequestMethod.GET, value = "info")
-//	public List<Oferta> mostrarInfo(@PathVariable(value="info") String info) {
-//		return ofertaServicio.
-//	}
+
 }
