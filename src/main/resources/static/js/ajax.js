@@ -183,34 +183,34 @@ function limpiarTabla() {
     resultados.replaceChildren();
 }
 
-//function MostrarModal(self) {
-//	$("#modal").modal("show");
-//		var oferta = self.parentNode.parentNode;
-//	var id_oferta = oferta.querySelector("th").innerText;
-//	fetch('/mostrarModal/'+id_oferta ,  {
-//		headers: {
-//			'content-type': 'application/json'
-//		},
-//		method: 'GET',
-//		.then(res => res.json())
-//		.then(data => {
-//		let modal = document.getElementByName("modal-body");
-//		modal.remplaceChildren();
-// 		let p1 = document.createElement('p');
-// 		p1.innerText=data.id_oferta;
-// 		modal.appendChild(p1);
-//		})
-//	
-//		
-//	})
-//}
+function MostrarModal(self) {
+	$("#modal").modal("show");
+		var oferta = self.parentNode.parentNode;
+	var id_oferta = oferta.querySelector("th").innerText;
+	fetch('/mostrarModal/'+id_oferta ,  {
+		headers: {
+			'content-type': 'application/json'
+		},
+		method: 'GET',
+		.then(res => res.json())
+		.then(data => {
+		var modal = document.getElementById("modal-body");
+		modal.remplaceChildren();
+ 		var p1 = document.createElement('p');
+ 		p1.innerText=data.id_oferta;
+ 		modal.appendChild(p1);
+		})
+	
+		
+	})
+}
 
 document.addEventListener("DOMContentLoaded", function() {
 
 	$("#crear").click(crearOfertas);
 	$("#borrar").click(deleteRow);
 	$("#filtrarPorPrioridad").click(filtrarPrioridad);
-	$("#modal").click(MostrarModal);
+	$("#info").click(MostrarModal);
 });
 
 

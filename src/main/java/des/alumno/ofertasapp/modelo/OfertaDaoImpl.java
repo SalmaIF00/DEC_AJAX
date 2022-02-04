@@ -47,6 +47,7 @@ public class OfertaDaoImpl extends DaoGenericoImpl<Oferta> implements OfertaDao 
 		List<Oferta> poferta = query.getResultList();
 		return poferta;
 	}
+
 	
 	
 }

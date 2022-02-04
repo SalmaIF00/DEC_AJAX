@@ -70,5 +70,13 @@ public class IndexController {
 		
 			
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "/mostrarModal/{id_oferta}")
+	public ArrayList<Oferta> buscarPorid( @PathVariable(value = "id_oferta") Integer id_oferta) {
+
+			return (ArrayList<Oferta>) ofertaServicio.obtenerOfertasid(id_oferta);
+	
+}
 
 }

@@ -55,6 +55,14 @@ public class OfertaServiceImpl implements OfertaServicio{
 		return null;
 	}
 	
+	@Override
+	public List<Oferta> obtenerOfertasid(Integer id_oferta) {
+		List <Oferta> lid = ofertaDao.findById(id_oferta);
+		return lid;
+		
+	}
+	
+	
 
 	
 }
