@@ -64,19 +64,24 @@ public class IndexController {
 
 	@ResponseBody
 	@GetMapping(value = "/buscar/{prioridad}")
-	public ArrayList<Oferta> buscarPorPatronPrioridad( @PathVariable(value = "prioridad") String prioridad) {
+	public ArrayList<Oferta> buscarPorPatronPrioridad(@PathVariable(value = "prioridad") String prioridad) {
 
-			return (ArrayList<Oferta>) ofertaServicio.BuscarPrioridad(prioridad);
-		
-			
+		return (ArrayList<Oferta>) ofertaServicio.BuscarPrioridad(prioridad);
+
 	}
-	
+
 	@ResponseBody
-	@GetMapping(value = "/mostrarModal/{id_oferta}")
-	public ArrayList<Oferta> buscarPorid( @PathVariable(value = "id_oferta") Integer id_oferta) {
+	@RequestMapping(method = RequestMethod.GET, value = "mostrarModal/{id_oferta}")
+	public Oferta obtenerTodos(@PathVariable Integer id_oferta) {
 
-			return (ArrayList<Oferta>) ofertaServicio.obtenerOfertasid(id_oferta);
-	
-}
+		return ofertaServicio.obtenerOfertasid(id_oferta);
+	}
 
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST, value = "editarOferta")
+	public Oferta editarOferta(@RequestBody Map<String, String> json) {
+		return ofertaServicio.actualizarOferta(
+				new Oferta(null, json.get("nombre_oferta"), json.get("fecha_publicacion"), json.get("prioridad"),
+						json.get("hiperenlace"), json.get("descripcion"), Double.valueOf(json.get("precio"))));
+	}
 }

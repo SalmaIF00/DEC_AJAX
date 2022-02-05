@@ -32,11 +32,11 @@ public class OfertaDaoImpl extends DaoGenericoImpl<Oferta> implements OfertaDao 
 	}
 	
 	@Override
-	public List<Oferta> findById(Integer id_oferta){
+	public Oferta findById(Integer id_oferta){
 		Query query = this.em.createQuery("FROM Oferta WHERE id_oferta = :idoferta");
 		query.setParameter("idoferta", id_oferta);
-		List<Oferta> idoferta = query.getResultList();
-		return idoferta;
+		Oferta o = (Oferta) query.getSingleResult();
+		return o;
 	}
 	
 	

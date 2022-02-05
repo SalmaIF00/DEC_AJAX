@@ -89,21 +89,21 @@ public class OfertaController {
 
 	// CONTROLADOR PERFIL OFERTA
 
-	@GetMapping("/prefil/{id_oferta}")
-	public String oferta(Model model, @PathVariable Integer id_oferta) {
-
-		List<Oferta> ofertas;
-		try {
-			ofertas = OfertaDao.findById(id_oferta);
-		} catch (EmptyResultDataAccessException e) {
-			ofertas = new ArrayList<Oferta>();
-
-		}
-
-		model.addAttribute("ofertas", ofertas);
-
-		return "perfil";
-	}
+//	@GetMapping("/prefil/{id_oferta}")
+//	public String oferta(Model model, @PathVariable Integer id_oferta) {
+//
+//		List<Oferta> ofertas;
+//		try {
+//			ofertas = OfertaDao.findById(id_oferta);
+//		} catch (EmptyResultDataAccessException e) {
+//			ofertas = new ArrayList<Oferta>();
+//
+//		}
+//
+//		model.addAttribute("ofertas", ofertas);
+//
+//		return "perfil";
+//	}
 
 	// SESSION NAVBAR
 

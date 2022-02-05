@@ -36,6 +36,8 @@ function crearFila(oferta) {
 	var boton1 = document.createElement("button");
 	boton1.setAttribute("id", "info");
 	boton1.setAttribute("class", "btn btn-info");
+	//	boton1.addEventListener("click",mostrarModal)
+	boton1.setAttribute("onclick", "mostrarModal(this)");
 	boton1.textContent = "Info";
 	td4_info.appendChild(boton1);
 	tr.appendChild(td4_info);
@@ -46,7 +48,6 @@ function crearFila(oferta) {
 
 	boton.setAttribute("class", "btn btn-danger");
 	boton.setAttribute("onclick", "deleteRow(this)");
-	//boton.addEventListener("click", deleteRow);
 	boton.textContent = "Borrar";
 	td5_borrar.appendChild(boton);
 	tr.appendChild(td5_borrar);
@@ -143,6 +144,7 @@ function deleteRow(borrar) {
 		})
 }
 
+//FILTRAR POR PRIORIDAD
 function filtrarPrioridad(e) {
 	e.preventDefault();
 	var tbody = document.getElementById("ofertas");
@@ -167,50 +169,92 @@ function filtrarPrioridad(e) {
 			limpiarTabla();
 
 			for (let oferta of response) {
-				
-			var tr = crearFila(oferta);
-			var tbody = document.getElementById("ofertas");
-			tbody.appendChild(tr);
+
+				var tr = crearFila(oferta);
+				var tbody = document.getElementById("ofertas");
+				tbody.appendChild(tr);
 
 			}
 		})
 }
 
 
-
+//LIMPIAR TABLA (NO DE LA BBDD)
 function limpiarTabla() {
-    let resultados = document.getElementById("ofertas");
-    resultados.replaceChildren();
+	let resultados = document.getElementById("ofertas");
+	resultados.replaceChildren();
 }
 
-function MostrarModal(self) {
+//MOSTRAR MODAL CON INFO DE OFERTA
+function mostrarModal(mostrar) {
+	//mostrar.preventDefault();
 	$("#modal").modal("show");
-		var oferta = self.parentNode.parentNode;
-	var id_oferta = oferta.querySelector("th").innerText;
-	fetch('/mostrarModal/'+id_oferta ,  {
+	var oferta1 = mostrar.parentNode.parentNode;
+	var id_oferta = oferta1.firstElementChild.innerText;
+	fetch('/mostrarModal/' + id_oferta, {
 		headers: {
 			'content-type': 'application/json'
-		},
-		method: 'GET',
+		}
+	})
 		.then(res => res.json())
 		.then(data => {
-		var modal = document.getElementById("modal-body");
-		modal.remplaceChildren();
- 		var p1 = document.createElement('p');
- 		p1.innerText=data.id_oferta;
- 		modal.appendChild(p1);
+			let modal = document.getElementById("modal-body");
+			modal.replaceChildren();
+			//ID
+			let p1 = document.createElement('p');
+			p1.innerText = data.id_oferta;
+			//NOMBRE OFERTA
+			let input = document.createElement('p');
+			input.innerText = data.nombre_oferta;
+			//FECHA
+			let date = document.createElement('p');
+			//				date.setAttribute("type","date");
+			date.innerText = data.fecha_publicacion;
+			//PRIORIDAD
+			let select = document.createElement('p');
+			select.innerText = data.prioridad;
+			//PRECIO
+			let number = document.createElement('p');
+			//				number.setAttribute("type","number");
+			number.innerText = data.precio;
+			//HIPERVINCULO
+			let https = document.createElement('p');
+			https.innerText = data.hiperenlace;
+			//DESCRIPCION
+			let description = document.createElement('p');
+			description.innerText = data.descripcion;
+			//AÑADIRLOS AL MODAL
+			modal.appendChild(p1);
+			modal.appendChild(input);
+			modal.appendChild(date);
+			modal.appendChild(select);
+			modal.appendChild(number);
+			modal.appendChild(https);
+			modal.appendChild(description);
 		})
-	
-		
-	})
 }
+
+//CERRAR MODAL
+function cerrarModal() {
+	$("#modal").modal("hide");
+}
+//EDITAR OFERTA
+function editarOferta() {
+
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
 
 	$("#crear").click(crearOfertas);
 	$("#borrar").click(deleteRow);
 	$("#filtrarPorPrioridad").click(filtrarPrioridad);
-	$("#info").click(MostrarModal);
+	$("#info").click(mostrarModal);
+	$("#cerrar-modal").click(cerrarModal);
+	$("#quitar").click(cerrarModal);
+	$("#editar").click(editarOferta);
+
 });
 
 

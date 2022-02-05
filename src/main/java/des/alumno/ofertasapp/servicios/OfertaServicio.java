@@ -20,7 +20,7 @@ public interface OfertaServicio  {
 
 	Oferta obtenerOfertas(String prioridad);
 
-	List<Oferta> obtenerOfertasid(Integer id_oferta);
+	Oferta obtenerOfertasid(Integer id_oferta);
 
 
 

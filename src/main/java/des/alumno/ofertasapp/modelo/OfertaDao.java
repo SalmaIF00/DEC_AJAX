@@ -12,7 +12,7 @@ public interface OfertaDao extends DaoGenerico<Oferta>{
 
 	List<Oferta> findByName(String nombre_oferta);
 
-	List<Oferta> findById(Integer id_oferta);
+	Oferta findById(Integer id_oferta);
 	
 	List<Oferta> findByPrioridad(String prioridad);
 
