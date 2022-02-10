@@ -156,7 +156,6 @@ function filtrarPrioridad(e) {
 			check = prioridad[i].value;
 		}
 	}
-	var prioridad = document.getElementById("selectProducto");
 
 	fetch('/buscar/' + check, {
 		headers: {
@@ -240,20 +239,32 @@ function cerrarModal() {
 }
 //EDITAR OFERTA
 function editarOferta() {
+$("#modal").modal("show");
+modal = document.getElementById("modal-body");
+var oferta2 = modal.childNode;
+var id_oferta = oferta2.firstElementChild.textContent;
+
+modal.replaceChildren();
+
+
+let input_id = document.createElement("input");
+input_id.setAttribute("type","hiden");
+input_id.setAttribute("value",id_oferta);
+input_id.setAttribute("name","id_oferta");
+
 
 }
-
 
 
 document.addEventListener("DOMContentLoaded", function() {
 
 	$("#crear").click(crearOfertas);
-	$("#borrar").click(deleteRow);
 	$("#filtrarPorPrioridad").click(filtrarPrioridad);
 	$("#info").click(mostrarModal);
 	$("#cerrar-modal").click(cerrarModal);
 	$("#quitar").click(cerrarModal);
-	$("#editar").click(editarOferta);
+//	$("#editar-modal").click(formEditarOferta);
+	$("#editar-modal").click(editarOferta);
 
 });
 
