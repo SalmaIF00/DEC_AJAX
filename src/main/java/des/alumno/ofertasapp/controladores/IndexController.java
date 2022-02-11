@@ -77,11 +77,9 @@ public class IndexController {
 		return ofertaServicio.obtenerOfertasid(id_oferta);
 	}
 
-	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST, value = "editarOferta")
-	public Oferta editarOferta(@RequestBody Map<String, String> json) {
-		return ofertaServicio.actualizarOferta(
-				new Oferta(null, json.get("nombre_oferta"), json.get("fecha_publicacion"), json.get("prioridad"),
-						json.get("hiperenlace"), json.get("descripcion"), Double.valueOf(json.get("precio"))));
-	}
+//	@ResponseBody
+//	@RequestMapping(method = RequestMethod.POST, value = "editarOferta")
+//	public Oferta editarOferta(@PathVariable(value = "id_oferta1") Integer id_oferta1) {
+//		return ofertaServicio.actualizarOferta(null)
+//	}
 }

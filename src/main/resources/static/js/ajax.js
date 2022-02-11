@@ -238,21 +238,91 @@ function cerrarModal() {
 	$("#modal").modal("hide");
 }
 //EDITAR OFERTA
-function editarOferta() {
-$("#modal").modal("show");
-modal = document.getElementById("modal-body");
-var oferta2 = modal.childNode;
-var id_oferta = oferta2.firstElementChild.textContent;
+function editarOferta(editar) {
+	$("#modal").modal("show");
+	var oferta1 = editar.parentNode.parentNode;
+	var id_oferta = oferta1.firstElementChild.innerText;
+	modal1 = document.getElementById("modal-body");
 
-modal.replaceChildren();
+	//var oferta2 = modal.childNode;
+	//var id_oferta = oferta2.firstElementChild.textContent;
+	modal1.replaceChildren();
 
+			//id oferta
+			let h5_id = document.createElement("h5");
+			h5_id.innerText = "Id oferta"
+			let p_id = document.createElement("p");
+		//p_id.setAttribute("value",id_oferta);
+			p_id.setAttribute("name", "id_oferta");
+			//nombre oferta
+			let h5_nombre = document.createElement("h5");
+			h5_nombre.innerText = "Nombre"
+			let input_nombre = document.createElement('input');
+			input_nombre.setAttribute("type", "text");
+			input_nombre.setAttribute("id", "input_nombre");
+			//fecha
+			let h5_fecha = document.createElement("h5");
+			h5_fecha.innerText   "Fecha"
+			let input_fecha = document.createElement('input');
+			input_fecha.setAttribute("type", "date");
+			input_fecha.setAttribute("id", "input_fecha");
+			//Prioridad
+			let h5_prioridad = document.createElement("h5");
+			h5_prioridad.innerText = "Prioridad"
+			let select_prioridad = document.createElement('select');
+			select_prioridad.setAttribute("name", "prioridad");
+			select_prioridad.setAttribute("id", "prioridad");
 
-let input_id = document.createElement("input");
-input_id.setAttribute("type","hiden");
-input_id.setAttribute("value",id_oferta);
-input_id.setAttribute("name","id_oferta");
+			let prioridad1 = document.createElement('option');
+			prioridad1.setAttribute("value", "Baja");
+			prioridad1.innerText = "Baja";
 
+			let prioridad2 = document.createElement('option');
+			prioridad2.setAttribute("value", "Media");
+			prioridad2.innerText = "Media";
 
+			let prioridad3 = document.createElement('option');
+			prioridad3.setAttribute("value", "Alta")
+			prioridad3.innerText = "Alta";
+
+			select_prioridad.appendChild(prioridad1);
+			select_prioridad.appendChild(prioridad2);
+			select_prioridad.appendChild(prioridad3);
+			//Precio
+			let h5_precio = document.createElement("h5");
+			h5_precio.innerText = "Precio"
+			let input_precio = document.createElement('input');
+			input_precio.setAttribute("type", "number");
+			input_precio.setAttribute("id", "input_precio");
+			//Hipervinculo
+			let h5_hipervinculo = document.createElement("h5");
+			h5_hipervinculo.innerText = "Hipervinculo"
+			let input_hipervinculo = document.createElement('input');
+			input_hipervinculo.setAttribute("type", "text");
+			input_hipervinculo.setAttribute("id", "input_hipervinculo");
+
+			//Descripcion
+			let h5_descripcion   document.createElement("h5");
+			h5_descripcion.innerText = "Descripcion"
+			let textarea_descripcion = document.createElement('textarea');
+			textarea_descripcion.setAttribute("id", "textarea_descripcion");
+
+			modal1.appendChild(h5_id);
+			modal1.appendChild(p_id);
+			modal1.appendChild(h5_nombre);
+			modal1.appendChild(input_nombre);
+			modal1.appendChild(h5_fecha);
+			modal1.appendChild(input_fecha);
+			modal1.appendChild(h5_prioridad);
+			modal1.appendChild(select_prioridad);
+			modal1.appendChild(h5_precio);
+			modal1.appendChild(input_precio);
+			modal1.appendChild(h5_hipervinculo);
+			modal1.appendChild(input_hipervinculo);
+			modal1.appendChild(h5_descripcion);
+			modal1.appendChild(textarea_descripcion);
+
+	
 }
 
 
@@ -263,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	$("#info").click(mostrarModal);
 	$("#cerrar-modal").click(cerrarModal);
 	$("#quitar").click(cerrarModal);
-//	$("#editar-modal").click(formEditarOferta);
+	//	$("#editar-modal").click(formEditarOferta);
 	$("#editar-modal").click(editarOferta);
 
 });
