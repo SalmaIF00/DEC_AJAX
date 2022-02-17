@@ -200,78 +200,23 @@ function mostrarModal(mostrar) {
 			let modal = document.getElementById("modal-body");
 			modal.replaceChildren();
 			//ID
-			let p1 = document.createElement('p');
-			p1.innerText = data.id_oferta;
+			let h3 = document.createElement('h3');
+			h3.innerText = data.id_oferta;
+			h3.setAttribute("id", "id_oferta");
 			//NOMBRE OFERTA
-			let input = document.createElement('p');
-			input.innerText = data.nombre_oferta;
+			let input = document.createElement('input');
+			input.setAttribute("value", data.nombre_oferta);
+			input.setAttribute("id", "input_nombre");
 			//FECHA
-			let date = document.createElement('p');
-			//				date.setAttribute("type","date");
-			date.innerText = data.fecha_publicacion;
+			let date = document.createElement('input');
+			date.setAttribute("type", "date");
+			date.setAttribute("id", "input_fecha");
+			date.setAttribute = ("value", data.fecha_publicacion);
+
 			//PRIORIDAD
-			let select = document.createElement('p');
-			select.innerText = data.prioridad;
-			//PRECIO
-			let number = document.createElement('p');
-			//				number.setAttribute("type","number");
-			number.innerText = data.precio;
-			//HIPERVINCULO
-			let https = document.createElement('p');
-			https.innerText = data.hiperenlace;
-			//DESCRIPCION
-			let description = document.createElement('p');
-			description.innerText = data.descripcion;
-			//AÑADIRLOS AL MODAL
-			modal.appendChild(p1);
-			modal.appendChild(input);
-			modal.appendChild(date);
-			modal.appendChild(select);
-			modal.appendChild(number);
-			modal.appendChild(https);
-			modal.appendChild(description);
-		})
-}
-
-//CERRAR MODAL
-function cerrarModal() {
-	$("#modal").modal("hide");
-}
-//EDITAR OFERTA
-function editarOferta(editar) {
-	$("#modal").modal("show");
-	var oferta1 = editar.parentNode.parentNode;
-	var id_oferta = oferta1.firstElementChild.innerText;
-	modal1 = document.getElementById("modal-body");
-
-	//var oferta2 = modal.childNode;
-	//var id_oferta = oferta2.firstElementChild.textContent;
-	modal1.replaceChildren();
-
-			//id oferta
-			let h5_id = document.createElement("h5");
-			h5_id.innerText = "Id oferta"
-			let p_id = document.createElement("p");
-		//p_id.setAttribute("value",id_oferta);
-			p_id.setAttribute("name", "id_oferta");
-			//nombre oferta
-			let h5_nombre = document.createElement("h5");
-			h5_nombre.innerText = "Nombre"
-			let input_nombre = document.createElement('input');
-			input_nombre.setAttribute("type", "text");
-			input_nombre.setAttribute("id", "input_nombre");
-			//fecha
-			let h5_fecha = document.createElement("h5");
-			h5_fecha.innerText   "Fecha"
-			let input_fecha = document.createElement('input');
-			input_fecha.setAttribute("type", "date");
-			input_fecha.setAttribute("id", "input_fecha");
-			//Prioridad
-			let h5_prioridad = document.createElement("h5");
-			h5_prioridad.innerText = "Prioridad"
-			let select_prioridad = document.createElement('select');
-			select_prioridad.setAttribute("name", "prioridad");
-			select_prioridad.setAttribute("id", "prioridad");
+			let prioridad = document.createElement('select');
+			prioridad.setAttribute("name", "prioridad");
+			prioridad.setAttribute("id", "select_prioridad");
 
 			let prioridad1 = document.createElement('option');
 			prioridad1.setAttribute("value", "Baja");
@@ -285,46 +230,86 @@ function editarOferta(editar) {
 			prioridad3.setAttribute("value", "Alta")
 			prioridad3.innerText = "Alta";
 
-			select_prioridad.appendChild(prioridad1);
-			select_prioridad.appendChild(prioridad2);
-			select_prioridad.appendChild(prioridad3);
-			//Precio
-			let h5_precio = document.createElement("h5");
-			h5_precio.innerText = "Precio"
-			let input_precio = document.createElement('input');
-			input_precio.setAttribute("type", "number");
-			input_precio.setAttribute("id", "input_precio");
-			//Hipervinculo
-			let h5_hipervinculo = document.createElement("h5");
-			h5_hipervinculo.innerText = "Hipervinculo"
-			let input_hipervinculo = document.createElement('input');
-			input_hipervinculo.setAttribute("type", "text");
-			input_hipervinculo.setAttribute("id", "input_hipervinculo");
 
-			//Descripcion
-			let h5_descripcion   document.createElement("h5");
-			h5_descripcion.innerText = "Descripcion"
-			let textarea_descripcion = document.createElement('textarea');
-			textarea_descripcion.setAttribute("id", "textarea_descripcion");
 
-			modal1.appendChild(h5_id);
-			modal1.appendChild(p_id);
-			modal1.appendChild(h5_nombre);
-			modal1.appendChild(input_nombre);
-			modal1.appendChild(h5_fecha);
-			modal1.appendChild(input_fecha);
-			modal1.appendChild(h5_prioridad);
-			modal1.appendChild(select_prioridad);
-			modal1.appendChild(h5_precio);
-			modal1.appendChild(input_precio);
-			modal1.appendChild(h5_hipervinculo);
-			modal1.appendChild(input_hipervinculo);
-			modal1.appendChild(h5_descripcion);
-			modal1.appendChild(textarea_descripcion);
+			if (prioridad1.value == data.prioridad) {
+				prioridad1.setAttribute("selected", "selected");
+			} else if (prioridad2.value == data.prioridad) {
+				prioridad2.setAttribute("selected", "selected");
+			} else if (prioridad3.value == data.prioridad) {
+				prioridad3.setAttribute("selected", "selected");
+			}
 
-	
+			prioridad.appendChild(prioridad1);
+			prioridad.appendChild(prioridad2);
+			prioridad.appendChild(prioridad3);
+			//PRECIO
+			let precio = document.createElement('input');
+			precio.setAttribute("type", "number");
+			precio.setAttribute("id", "input_precio");
+			precio.setAttribute("value", data.precio);
+
+			//HIPERVINCULO
+			let hiperenlace = document.createElement('input');
+			hiperenlace.setAttribute("type", "text");
+			hiperenlace.setAttribute("id", "input_hipervinculo");
+			hiperenlace.setAttribute("value", data.hiperenlace);
+
+			//DESCRIPCION
+			let descripcion = document.createElement('input');
+			descripcion.setAttribute("type","text");
+			descripcion.setAttribute("id", "input_descripcion");
+			descripcion.setAttribute("value", data.descripcion);
+
+			//AÑADIRLOS AL MODAL
+			modal.appendChild(h3);
+			modal.appendChild(input);
+			modal.appendChild(date);
+			modal.appendChild(prioridad);
+			modal.appendChild(precio);
+			modal.appendChild(hiperenlace);
+			modal.appendChild(descripcion);
+		})
 }
 
+//CERRAR MODAL
+function cerrarModal() {
+	$("#modal").modal("hide");
+}
+//EDITAR OFERTA
+function editarOferta() {
+	modal1 = document.getElementById("modal-body");
+	var id_oferta = modal1.querySelector("h3").innerText;
+	var nombre = document.getElementById("input_nombre").value;
+	var fecha = document.getElementById("input_fecha").value;
+	var prioridad = document.getElementById("select_prioridad").value;
+//	var precio = document.getElementById("input_precio").value;
+	var hipervinculo = document.getElementById("input_hipervinculo").value;
+	var descripcion = document.getElementById("input_descripcion").value;
+
+		fetch('/editarOferta'+id_oferta, {
+		headers: {
+			'content-type': 'application/json'
+		},
+		method: 'POST',
+		body: JSON.stringify({
+			nombre_oferta: nombre,
+			fecha_publicacion: fecha,
+			prioridad: prioridad,
+			precio: precio,
+			hiperenlace: hipervinculo,
+			descripcion: descripcion
+		})
+	})
+		.then(res => res.json())
+		.then(data => {
+			var tr = crearFila(data);
+			var tbody = document.getElementById("ofertas");
+			tbody.appendChild(tr);
+
+})
+
+}
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -333,8 +318,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	$("#info").click(mostrarModal);
 	$("#cerrar-modal").click(cerrarModal);
 	$("#quitar").click(cerrarModal);
-	//	$("#editar-modal").click(formEditarOferta);
-	$("#editar-modal").click(editarOferta);
+	$("#editar").click(editarOferta);
 
 });
 

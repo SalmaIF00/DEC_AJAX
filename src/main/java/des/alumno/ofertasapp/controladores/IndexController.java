@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import des.alumno.ofertasapp.entidades.Oferta;
@@ -77,9 +76,12 @@ public class IndexController {
 		return ofertaServicio.obtenerOfertasid(id_oferta);
 	}
 
-//	@ResponseBody
-//	@RequestMapping(method = RequestMethod.POST, value = "editarOferta")
-//	public Oferta editarOferta(@PathVariable(value = "id_oferta1") Integer id_oferta1) {
-//		return ofertaServicio.actualizarOferta(null)
-//	}
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT, value = "editarOferta/{id_oferta}")
+	public ResponseEntity<Void> editarOferta(@PathVariable(value = "id_oferta") Integer id_oferta,  @RequestBody Oferta oferta) {
+		oferta = ofertaServicio.obtenerOfertasid(id_oferta);
+		ofertaServicio.actualizarOferta(oferta);
+	    return new ResponseEntity<Void>(HttpStatus.CREATED);
+		
+	}
 }
