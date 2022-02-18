@@ -89,6 +89,5 @@ public class IndexController {
 		nuevaOferta.setDescripcion(oferta.getDescripcion());
 		ofertaServicio.actualizarOferta(nuevaOferta);
 	    return new ResponseEntity<Object>(nuevaOferta,HttpStatus.CREATED);
-		
 	}
 }
