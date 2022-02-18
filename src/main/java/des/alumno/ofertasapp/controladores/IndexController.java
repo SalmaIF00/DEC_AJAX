@@ -78,10 +78,17 @@ public class IndexController {
 
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, value = "editarOferta/{id_oferta}")
-	public ResponseEntity<Void> editarOferta(@PathVariable(value = "id_oferta") Integer id_oferta,  @RequestBody Oferta oferta) {
-		oferta = ofertaServicio.obtenerOfertasid(id_oferta);
-		ofertaServicio.actualizarOferta(oferta);
-	    return new ResponseEntity<Void>(HttpStatus.CREATED);
+	public ResponseEntity<Object> editarOferta(@PathVariable(value = "id_oferta") Integer id_oferta,  @RequestBody Oferta oferta) {
+		Oferta nuevaOferta  = ofertaServicio.obtenerOfertasid(id_oferta);
+		nuevaOferta.getId_oferta();
+		nuevaOferta.setNombre_oferta(oferta.getNombre_oferta());
+		nuevaOferta.setFecha_publicacion(oferta.getFecha_publicacion());
+		nuevaOferta.setPrioridad(oferta.getPrioridad());
+		nuevaOferta.setPrecio(oferta.getPrecio());
+		nuevaOferta.setHiperenlace(oferta.getHiperenlace());
+		nuevaOferta.setDescripcion(oferta.getDescripcion());
+		ofertaServicio.actualizarOferta(nuevaOferta);
+	    return new ResponseEntity<Object>(nuevaOferta,HttpStatus.CREATED);
 		
 	}
 }

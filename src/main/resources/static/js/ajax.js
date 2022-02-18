@@ -257,7 +257,7 @@ function mostrarModal(mostrar) {
 
 			//DESCRIPCION
 			let descripcion = document.createElement('input');
-			descripcion.setAttribute("type","text");
+			descripcion.setAttribute("type", "text");
 			descripcion.setAttribute("id", "input_descripcion");
 			descripcion.setAttribute("value", data.descripcion);
 
@@ -283,15 +283,15 @@ function editarOferta() {
 	var nombre = document.getElementById("input_nombre").value;
 	var fecha = document.getElementById("input_fecha").value;
 	var prioridad = document.getElementById("select_prioridad").value;
-//	var precio = document.getElementById("input_precio").value;
+	var precio = document.getElementById("input_precio").value;
 	var hipervinculo = document.getElementById("input_hipervinculo").value;
 	var descripcion = document.getElementById("input_descripcion").value;
 
-		fetch('/editarOferta'+id_oferta, {
+	fetch('/editarOferta/' + id_oferta, {
 		headers: {
 			'content-type': 'application/json'
 		},
-		method: 'POST',
+		method: 'PUT',
 		body: JSON.stringify({
 			nombre_oferta: nombre,
 			fecha_publicacion: fecha,
@@ -302,14 +302,15 @@ function editarOferta() {
 		})
 	})
 		.then(res => res.json())
-		.then(data => {
-			var tr = crearFila(data);
-			var tbody = document.getElementById("ofertas");
-			tbody.appendChild(tr);
 
-})
+	obtenerOfertas();
+	cerrarModal();
 
+		
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
 
