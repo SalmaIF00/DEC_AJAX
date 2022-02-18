@@ -303,8 +303,7 @@ function editarOferta() {
 	})
 		.then(res => res.json())
 
-	obtenerOfertas();
-	cerrarModal();
+	location.reload();
 
 		
 }
